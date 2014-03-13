@@ -16,6 +16,7 @@ class PLBlog < Sinatra::Base
   # Setup/common methods for all routes
   before do
     @nav_choice = "blog"
+    @prev_search = "--"
 
   end
 
@@ -25,14 +26,16 @@ class PLBlog < Sinatra::Base
     erb :bloghome
   end
   
-  get "/nav_menu_select" do   
+  post "/nav_menu_select" do   
     @nav_choice = params[:menu_selection]
     
     erb :bloghome
   end
   
   get "/search" do
+    @prev_search = params[:search_text]
     
+    erb :bloghome
   end
   
   get "/about" do

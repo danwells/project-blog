@@ -9,16 +9,32 @@
 </style>
 <div class="banner">
 	<h1>PLACEHOLDER HEADER/BLOG TITLE</h1>
-	Navigation (Current Choice - <%= @nav_choice %>):
-	<form action="nav_menu_select" method="get">
-		<select name="menu_selection" id="menu_selection">
-			<option value="blog" <%= "selected" if @nav_choice == "blog" %>>Blog Home</option>
-			<option value="toc" <%= "selected" if @nav_choice == "toc" %>>Table of Contents</option>
-			<option value="browse" <%= "selected" if @nav_choice == "browse" %>>Browse Articles</option>
-			<option value="options" <%= "selected" if @nav_choice == "options" %>>Display Options</option>			
-		</select>		
-		<input type="submit" value="Continue &rarr;">
-	</form>
+	
+	<div id="nav_choices">
+		Navigation (Current Choice - <%= @nav_choice %>):
+		<form action="nav_menu_select" method="post">
+			<select name="menu_selection" id="menu_selection">
+				<option value="blog" <%= "selected" if @nav_choice == "blog" %>>Blog Home</option>
+				<option value="toc" <%= "selected" if @nav_choice == "toc" %>>Table of Contents</option>
+				<option value="browse" <%= "selected" if @nav_choice == "browse" %>>Browse Articles</option>
+				<option value="options" <%= "selected" if @nav_choice == "options" %>>Display Options</option>			
+			</select>		
+			<input type="submit" value="Continue &rarr;">
+		</form>
+	</div>
+	
+	<div id="search_box">
+		<form action="search" method="get">
+			<label for="search_text">Search:</label><br>
+			<input type="text" name="search_text">
+			<input type="submit" value="Continue &rarr;"><br>
+			Previous Search: <%= @prev_search %>	
+		</form>
+	</div>
+	
+	<div id="header_about">
+		
+	</div>
 	
 </div>
 
