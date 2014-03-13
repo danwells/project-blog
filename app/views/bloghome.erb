@@ -1,16 +1,30 @@
+<style>
+body {
+	background-color: lightblue;
+}
+	
+</style>
+
+<body id="bloghome">
+	<h1>BLOG BODY</h1>
+	<p>Test pargraph</p>
+	<p>Test pargraph</p>
+	<p>Test pargraph</p>
+</body>
+
 <!-- EXAMPLE CODE
 <p>Enter values for the following fields:</p>
 
 <div>
   <form method="post" action="/script" id="placeholders">
-    <% @placeholders.each do |placeholder| %>
+    <%# @placeholders.each do |placeholder| %>
       <p>
         <label>
-          <%= placeholder[0] %>
-          <input type="text" name="<%= field_label(placeholder[0]) %>">
+          <%#= placeholder[0] %>
+          <input type="text" name="<%#= field_label(placeholder[0]) %>">
         </label>
       </p>
-    <% end %>
+    <%# end %>
     
     <input type="submit" value="Submit">
   </form>
