@@ -6,9 +6,16 @@
 	color: lightblue;
 }
 
+a:link {
+	color: lightblue;
+}
+
 </style>
+
 <div class="banner">
 	<h1>PLACEHOLDER HEADER/BLOG TITLE</h1>
+	<p><em>Title will be stored/retrieved from "titles" table. <br>
+	Chosen title: "Programming Languages - Syntax Comparisons by Example"</em><br></p>
 	
 	<div id="nav_choices">
 		Navigation (Current Choice - <%= @nav_choice %>):
@@ -28,11 +35,12 @@
 			<label for="search_text">Search:</label><br>
 			<input type="text" name="search_text">
 			<input type="submit" value="Continue &rarr;"><br>
-			Previous Search: <%= @prev_search %>	
+			Previous Search: <%= "'" + @prev_search + "'" %>	
 		</form>
 	</div>
 	
 	<div id="header_about">
+		<a href="/about">About</a>
 		
 	</div>
 	

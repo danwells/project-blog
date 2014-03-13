@@ -40,6 +40,7 @@ class PLBlog < Sinatra::Base
   
   get "/about" do
     
+    erb :about
   end
   
   get "/contact_info" do
