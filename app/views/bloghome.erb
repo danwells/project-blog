@@ -1,0 +1,18 @@
+<!-- EXAMPLE CODE
+<p>Enter values for the following fields:</p>
+
+<div>
+  <form method="post" action="/script" id="placeholders">
+    <% @placeholders.each do |placeholder| %>
+      <p>
+        <label>
+          <%= placeholder[0] %>
+          <input type="text" name="<%= field_label(placeholder[0]) %>">
+        </label>
+      </p>
+    <% end %>
+    
+    <input type="submit" value="Submit">
+  </form>
+</div> 
+-->
