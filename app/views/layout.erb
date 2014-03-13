@@ -9,6 +9,17 @@
 </style>
 <div class="banner">
 	<h1>PLACEHOLDER HEADER/BLOG TITLE</h1>
+	Navigation (Current Choice - <%= @nav_choice %>):
+	<form action="nav_menu_select" method="get">
+		<select name="menu_selection" id="menu_selection">
+			<option value="blog" <%= "selected" if @nav_choice == "blog" %>>Blog Home</option>
+			<option value="toc" <%= "selected" if @nav_choice == "toc" %>>Table of Contents</option>
+			<option value="browse" <%= "selected" if @nav_choice == "browse" %>>Browse Articles</option>
+			<option value="options" <%= "selected" if @nav_choice == "options" %>>Display Options</option>			
+		</select>		
+		<input type="submit" value="Continue &rarr;">
+	</form>
+	
 </div>
 
 <%= yield %>

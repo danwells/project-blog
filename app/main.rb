@@ -15,12 +15,19 @@ class PLBlog < Sinatra::Base
 
   # Setup/common methods for all routes
   before do
+    @nav_choice = "blog"
 
   end
 
   # Routes methods
   get "/" do
 
+    erb :bloghome
+  end
+  
+  get "/nav_menu_select" do   
+    @nav_choice = params[:menu_selection]
+    
     erb :bloghome
   end
   
