@@ -1,4 +1,7 @@
-require 'sinatra/base'
+require 'pry'
+require 'active_record'
+require 'sinatra'
+require 'sinatra/reloader'
 
 require_relative './functions'
 
@@ -17,12 +20,15 @@ class PLBlog < Sinatra::Base
   before do
     @nav_choice = "blog"
     @prev_search = "--"
+    page_title = "Programming Languages - Syntax Comparisons by Example"
+    Title.create({:titlestring => page_title, :titletype => "page"})
+    @titles = Title.all
 
   end
 
   # Routes methods
   get "/" do
-
+    @page_title = Title.find_by_titletype("page")
     erb :bloghome
   end
   

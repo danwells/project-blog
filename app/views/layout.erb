@@ -36,9 +36,7 @@ a:active {
 </style>
 
 <div class="banner">
-	<h1>PLACEHOLDER HEADER/BLOG TITLE</h1>
-	<p><em>Title will be stored/retrieved from "titles" table. <br>
-	Chosen title: "Programming Languages - Syntax Comparisons by Example"</em><br></p>
+	<h1><%= @page_title.titlestring %></h1>
 	
 	<div id="nav_choices">
 		Navigation (Current Choice - <%= @nav_choice %>):
