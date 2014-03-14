@@ -19,7 +19,6 @@ class PLBlog < Sinatra::Base
   # Setup/common methods for all routes
   before do
     # Add page title to database if it doesn't already exist
-    pagetitle = Title.find_by_titletype("page")  
     if Title.find_by_titletype("page").nil?  
       title_string = "Programming Languages - Syntax Comparisons by Example"    
       Title.create({:titlestring => title_string, :titletype => "page"}) 
