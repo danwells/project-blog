@@ -29,7 +29,7 @@ class PLBlog < Sinatra::Base
     @nav_choice = "blog"
     @prev_search = "--"    
 
-    binding.pry
+    # binding.pry
 
   end
 
@@ -40,8 +40,16 @@ class PLBlog < Sinatra::Base
   
   post "/nav_menu_select" do   
     @nav_choice = params[:menu_selection]
-    
-    erb :bloghome
+    case @nav_choice
+    when "toc"
+      erb :toc, :layout => false
+    when "browse"
+      erb :browse, :layout => false
+    when "options"
+      erb :options, :layout => false
+    else
+      erb :bloghome
+    end
   end
   
   get "/search" do
@@ -57,6 +65,7 @@ class PLBlog < Sinatra::Base
   
   get "/contact_info" do
     
+    erb :contact
   end
 
 end
