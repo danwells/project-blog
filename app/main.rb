@@ -18,17 +18,24 @@ class PLBlog < Sinatra::Base
 
   # Setup/common methods for all routes
   before do
-    @nav_choice = "blog"
-    @prev_search = "--"
-    page_title = "Programming Languages - Syntax Comparisons by Example"
-    Title.create({:titlestring => page_title, :titletype => "page"})
+    # Add page title to database if it doesn't already exist
+    pagetitle = Title.find_by_titletype("page")  
+    if Title.find_by_titletype("page").nil?  
+      title_string = "Programming Languages - Syntax Comparisons by Example"    
+      Title.create({:titlestring => title_string, :titletype => "page"}) 
+    end  
+     
     @titles = Title.all
+    @page_title = Title.find_by_titletype("page")
+    @nav_choice = "blog"
+    @prev_search = "--"    
+
+    binding.pry
 
   end
 
   # Routes methods
   get "/" do
-    @page_title = Title.find_by_titletype("page")
     erb :bloghome
   end
   

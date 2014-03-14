@@ -14,22 +14,27 @@ ActiveRecord::Schema.define do
     end
   end
   
-  # unless ActiveRecord::Base.connection.tables.include? 'friends'
-  #   create_table :friends do |table|
-  #     table.column :user_id, :integer
-  #     table.column :name, :string
-  #   end
-  # end
+  unless ActiveRecord::Base.connection.tables.include? 'blog_contents'
+    create_table :blog_contents do |table|
+      table.column :title_id, :integer
+      table.column :html_div, :string
+      table.column :h_level, :integer
+    end
+  end
 end
 
 class Title < ActiveRecord::Base
   # title - string
   # type - string
   
-  # belongs_to :blogtemp
+  belongs_to :blog_contents
   
 end
 
-# class BlogTemp < ActiveRecord::Base
-#   has_many :titles
-# end
+class BlogContent < ActiveRecord::Base
+  # title_id - integer
+  # html_div - string
+  # h_level - integer
+  
+  has_many :titles
+end
