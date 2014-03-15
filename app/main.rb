@@ -31,15 +31,15 @@ class PLBlog < Sinatra::Base
 
     languages = ["javascript", "java", "php", "csharp", "python", "c_c++", "ruby", "obj-c"]
     
-    binding.pry
+    # binding.pry
     
     if Section.count < languages.count
       languages.each do |language|
-        Section.create({:section_title => language, :section_body => "", :media_id => -1})
+        Section.create({:article_id => -1, :section_title => language, :section_body => ""})
       end
     end
     
-    binding.pry
+    # binding.pry
 
   end
 

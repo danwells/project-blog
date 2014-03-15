@@ -9,6 +9,7 @@ ActiveRecord::Base.logger = Logger.new(STDERR)
 ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include? 'titles'
     create_table :titles do |table|
+      table.column :blog_content_id, :integer
       table.column :titlestring, :string
       table.column :titletype, :string
     end
@@ -16,7 +17,6 @@ ActiveRecord::Schema.define do
   
   unless ActiveRecord::Base.connection.tables.include? 'blog_contents'
     create_table :blog_contents do |table|
-      table.column :title_id, :integer
       table.column :html_div, :string
       table.column :h_level, :integer
     end
@@ -24,9 +24,9 @@ ActiveRecord::Schema.define do
 
   unless ActiveRecord::Base.connection.tables.include? 'sections'
     create_table :sections do |table|
+      table.column :article_id, :integer
       table.column :section_title, :string
       table.column :section_body, :string
-      table.column :media_id, :integer
     end
   end
 
@@ -36,7 +36,7 @@ class Title < ActiveRecord::Base
   # title - string
   # type - string
   
-  belongs_to :blog_contents
+  belongs_to :blog_content
   
 end
 
@@ -53,6 +53,6 @@ class Section < ActiveRecord::Base
   # section_body - string
   # media_id - integer
   
- # belongs_to :articles
+ # belongs_to :article
  # has_many :media
 end
