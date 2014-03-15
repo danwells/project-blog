@@ -2,15 +2,69 @@
 body {
 	background-color: #ADD8E6;
 }
+
+div.section_box {
+	border: 1px solid purple;
+}
+	
+div.comment_box {
+	border: 5px solid black;
+}
 	
 </style>
 
 <body id="bloghome">
-	<h1>BLOG BODY</h1>
-	<p>Test pargraph</p>
-	<p>Test pargraph</p>
-	<p>Test pargraph</p>
+	<h2>Category: <em>(article.category)</em></h2>
+	<p>Introductory paragraph about blog/category..............</p>
+
+<hr>
+	<h3>Article Title: (e.g., The Variable Assignment Statement)  <em>(article.article_title)</em></h3>
+	By: <em>(author.first + author.last)</em><br>
+	Posted on: <em>(article.date_posted)</em>
+	<p>Introductory paragraph about this article</p>
 	
+<hr>
+<hr>
+	<div class="section_box" id="Section_first_idnum">
+	  <h4><em>First Section Title (section.section_title)</em></h4>	
+		<p><em>...section body text...(section.section_body)</em></p>
+		<p><em>...supporting media (0 or more instances of medium.media_link/media_data of type medium.type)</em></p>
+	</div>
+		
+<hr>
+	
+	<p>               .</p>
+	<p>               .</p>
+	<p>... Repeat for each section...</p>
+	<p>               .</p>
+	<p>               .</p>
+		
+<hr>
+
+	<div class="section_box" id="Section_last_idnum">
+	  <h4><em>Last Section Title (section.section_title)</em></h4>	
+		<p><em>...section body text...(section.section_body)</em></p>
+		<p><em>...supporting media (0 or more instances of medium.media_link/media_data of type medium.type)</em></p>
+	</div>
+<hr>
+<hr>
+
+	<h3>Comments:</h3>
+	<div id="comment_entry_form">
+		Add form to gather new comments and signup if not already in database.
+		<input type="text" name="" value="" id="">
+	</div>
+	<div class="comment_box" id="Commenter_idnum">
+		<p>From:<em>(commenter.first + commenter.last)</em><br>
+		Added on:<em>(commenter.date_commented)</em></p>
+		<p><em>...comment body...(commenter.comment_text)</em></p>		
+	</div>
+	<p>               .</p>
+	<p>               .</p>
+	<p>... Repeat for each comment...</p>
+	<p>               .</p>
+	<p>               .</p>
+		
 </body>
 
 <!-- EXAMPLE CODE
