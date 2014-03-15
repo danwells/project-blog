@@ -28,13 +28,14 @@ class PLBlog < Sinatra::Base
       if Article.find_by_article_title(title).nil?
         author = Author.find_or_create_by({:first => "Dan", :last => "Wells"})
         category = "Programming Languages"
-        section = Section.create({
-          :article_id => -1, 
-          :section_title => "a section title", 
-          :section_body => "section body text"})
-        Article.create({:author_id => author.id, :blog_content_id => -1, :category => category, :article_title => title, :date_posted => Time.now})
+        Article.create({
+          :author_id => author.id, 
+          :blog_content_id => -1, 
+          :category => category, 
+          :article_title => title, 
+          :date_posted => Time.now})
       end
-      @articles = Article.all
+      # @articles = Article.all
     end
 
   end
@@ -45,17 +46,22 @@ class PLBlog < Sinatra::Base
     @nav_choice = "blog"
     @prev_search = "--"    
 
-    default_article = "The Variable Assignment Statement"
-    initialize_default_article(default_article)
+    default_title = "The Variable Assignment Statement"
+    initialize_default_article(default_title)
+    @current_article = Article.find_by_article_title(default_title)
     
+    languages = ["JavaScript", "Java", "PHP", "C#", "Python", "C/C++", "Ruby", "Objective-C"]
+    # if Section.count < languages.count
+      languages.each do |language|
+        @current_article.sections.create({
+          :section_title => "#{default_title} for (#{language})", 
+          :section_body => "Section text body for the #{language} language...."})
+        # Section.create({:article_id => -1, :section_title => language, :section_body => ""})
+      end
+    # end
+
     binding.pry
     
-    # languages = ["javascript", "java", "php", "csharp", "python", "c_c++", "ruby", "obj-c"]
-    # if Section.count < languages.count
-    #   languages.each do |language|
-    #     Section.create({:article_id => -1, :section_title => language, :section_body => ""})
-    #   end
-    # end
     
   end
 
