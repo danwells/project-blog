@@ -13,34 +13,50 @@ class PLBlog < Sinatra::Base
   
   # Helper methods
   helpers do
+    
+    def add_initial_page_title 
+      # Add page title to database if it doesn't already exist
+      if Title.find_by_titletype("page").nil?  
+        title_string = "Programming Languages - Syntax Comparisons by Example"    
+        Title.create({:titlestring => title_string, :titletype => "page"}) 
+      end     
+      @titles = Title.all
+      @page_title = Title.find_by_titletype("page")
+    end
+    
+    def initialize_default_article(title)
+      if Article.find_by_article_title(title).nil?
+        author = Author.find_or_create_by({:first => "Dan", :last => "Wells"})
+        category = "Programming Languages"
+        section = Section.create({
+          :article_id => -1, 
+          :section_title => "a section title", 
+          :section_body => "section body text"})
+        Article.create({:author_id => author.id, :blog_content_id => -1, :category => category, :article_title => title, :date_posted => Time.now})
+      end
+      @articles = Article.all
+    end
 
   end
 
   # Setup/common methods for all routes
   before do
-    # Add page title to database if it doesn't already exist
-    if Title.find_by_titletype("page").nil?  
-      title_string = "Programming Languages - Syntax Comparisons by Example"    
-      Title.create({:titlestring => title_string, :titletype => "page"}) 
-    end  
-    
-    @titles = Title.all
-    @page_title = Title.find_by_titletype("page")
+    add_initial_page_title
     @nav_choice = "blog"
     @prev_search = "--"    
 
-    languages = ["javascript", "java", "php", "csharp", "python", "c_c++", "ruby", "obj-c"]
+    default_article = "The Variable Assignment Statement"
+    initialize_default_article(default_article)
     
-    # binding.pry
+    binding.pry
     
-    if Section.count < languages.count
-      languages.each do |language|
-        Section.create({:article_id => -1, :section_title => language, :section_body => ""})
-      end
-    end
+    # languages = ["javascript", "java", "php", "csharp", "python", "c_c++", "ruby", "obj-c"]
+    # if Section.count < languages.count
+    #   languages.each do |language|
+    #     Section.create({:article_id => -1, :section_title => language, :section_body => ""})
+    #   end
+    # end
     
-    # binding.pry
-
   end
 
   # Routes methods
