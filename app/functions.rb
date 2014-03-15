@@ -7,6 +7,13 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Base.logger = Logger.new(STDERR)
 
 ActiveRecord::Schema.define do
+  unless ActiveRecord::Base.connection.tables.include? 'blog_contents'
+    create_table :blog_contents do |table|
+      table.column :html_div, :string
+      table.column :h_level, :integer
+    end
+  end
+
   unless ActiveRecord::Base.connection.tables.include? 'titles'
     create_table :titles do |table|
       table.column :blog_content_id, :integer
@@ -15,10 +22,13 @@ ActiveRecord::Schema.define do
     end
   end
   
-  unless ActiveRecord::Base.connection.tables.include? 'blog_contents'
-    create_table :blog_contents do |table|
-      table.column :html_div, :string
-      table.column :h_level, :integer
+  unless ActiveRecord::Base.connection.tables.include? 'articles'
+    create_table :articles do |table|
+      table.column :author_id, :integer
+      table.column :blog_content_id, :integer
+      table.column :category, :string
+      table.column :article_title, :string
+      table.column :date_posted, :datetime
     end
   end
 
@@ -32,27 +42,40 @@ ActiveRecord::Schema.define do
 
 end
 
+class BlogContent < ActiveRecord::Base
+  # html_div - string
+  # h_level - integer
+  
+  has_many :titles
+  has_many :articles
+end
+
 class Title < ActiveRecord::Base
-  # title - string
-  # type - string
+  # blog_content_id - integer
+  # titlestring - string
+  # titletype - string
   
   belongs_to :blog_content
   
 end
 
-class BlogContent < ActiveRecord::Base
-  # title_id - integer
-  # html_div - string
-  # h_level - integer
-  
-  has_many :titles
+class Article < ActiveRecord::Base
+  # author_id - integer
+  # category - string
+  # article_title - string
+  # date_posted - datetime
+
+  has_many :sections
+  has_many :commenters
+  belongs_to :author
+  belongs_to :blog_content
 end
 
 class Section < ActiveRecord::Base
+  # article_id - integer
   # section_title - string
   # section_body - string
-  # media_id - integer
   
- # belongs_to :article
- # has_many :media
+  belongs_to :article
+  has_many :media
 end
