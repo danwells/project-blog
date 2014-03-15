@@ -6,6 +6,8 @@ ActiveRecord::Base.establish_connection(
 
 ActiveRecord::Base.logger = Logger.new(STDERR)
 
+####################### Table Creation #######################
+
 ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include? 'blog_contents'
     create_table :blog_contents do |table|
@@ -19,6 +21,24 @@ ActiveRecord::Schema.define do
       table.column :blog_content_id, :integer
       table.column :titlestring, :string
       table.column :titletype, :string
+    end
+  end
+  
+  unless ActiveRecord::Base.connection.tables.include? 'authors'
+    create_table :authors do |table|
+      table.column :first, :string
+      table.column :last, :string
+    end
+  end
+  
+  unless ActiveRecord::Base.connection.tables.include? 'commenters'
+    create_table :commenters do |table|
+      table.column :article_id, :integer
+      table.column :first, :string
+      table.column :last, :string
+      table.column :email, :string
+      table.column :comment_text, :text
+      table.column :date_commented, :datetime
     end
   end
   
@@ -40,7 +60,18 @@ ActiveRecord::Schema.define do
     end
   end
 
+  unless ActiveRecord::Base.connection.tables.include? 'media'
+    create_table :media do |table|
+      table.column :section_id, :integer
+      table.column :type, :string
+      table.column :media_link, :string
+      table.column :media_data, :binary
+    end
+  end
+
 end
+
+####################### Table Classes #######################
 
 class BlogContent < ActiveRecord::Base
   # html_div - string
@@ -55,8 +86,25 @@ class Title < ActiveRecord::Base
   # titlestring - string
   # titletype - string
   
-  belongs_to :blog_content
-  
+  belongs_to :blog_content 
+end
+
+class Author < ActiveRecord::Base
+  # first - string
+  # last - string
+
+  has_many :articles
+end
+
+class Commenter < ActiveRecord::Base
+  # article_id - integer
+  # first - string
+  # last - string
+  # email - string
+  # comment_text - text
+  # date_commented - datetime
+
+  belongs_to :article
 end
 
 class Article < ActiveRecord::Base
@@ -78,4 +126,13 @@ class Section < ActiveRecord::Base
   
   belongs_to :article
   has_many :media
+end
+
+class Medium < ActiveRecord::Base
+  # section_id - integer
+  # type - string
+  # media_link - string
+  # media_data - binary
+  
+  belongs_to :section
 end
