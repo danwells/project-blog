@@ -21,6 +21,15 @@ ActiveRecord::Schema.define do
       table.column :h_level, :integer
     end
   end
+
+  unless ActiveRecord::Base.connection.tables.include? 'sections'
+    create_table :sections do |table|
+      table.column :section_title, :string
+      table.column :section_body, :string
+      table.column :media_id, :integer
+    end
+  end
+
 end
 
 class Title < ActiveRecord::Base
@@ -37,4 +46,13 @@ class BlogContent < ActiveRecord::Base
   # h_level - integer
   
   has_many :titles
+end
+
+class Section < ActiveRecord::Base
+  # section_title - string
+  # section_body - string
+  # media_id - integer
+  
+ # belongs_to :articles
+ # has_many :media
 end

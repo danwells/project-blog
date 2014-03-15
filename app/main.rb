@@ -23,13 +23,23 @@ class PLBlog < Sinatra::Base
       title_string = "Programming Languages - Syntax Comparisons by Example"    
       Title.create({:titlestring => title_string, :titletype => "page"}) 
     end  
-     
+    
     @titles = Title.all
     @page_title = Title.find_by_titletype("page")
     @nav_choice = "blog"
     @prev_search = "--"    
 
-    # binding.pry
+    languages = ["javascript", "java", "php", "csharp", "python", "c_c++", "ruby", "obj-c"]
+    
+    binding.pry
+    
+    if Section.count < languages.count
+      languages.each do |language|
+        Section.create({:section_title => language, :section_body => "", :media_id => -1})
+      end
+    end
+    
+    binding.pry
 
   end
 
