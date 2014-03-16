@@ -76,8 +76,16 @@ div.comment_box {
 
 	<h3>Comments:</h3>
 	<div id="comment_entry_form">
+		<h4>Enter your information and comment:</h4>
+		<form action="comment_entry" method="post">
+			First Name: <input type="text" name="first" value=""><br>
+			Last Name : <input type="text" name="last" value=""><br>
+			Email     : <input type="email" name="email" value=""><br>
+		  Comment:<br> <textarea name="comments" rows="8" cols="40"></textarea>
+			<p><input type="submit" value="Continue &rarr;"></p>
+		</form>
+		
 		Add form to gather new comments and signup if not already in database.
-		<input type="text" name="" value="" id="">
 	</div>
 	<div class="comment_box" id="Commenter_idnum">
 		<p>From:<em>(commenter.first + commenter.last)</em><br>

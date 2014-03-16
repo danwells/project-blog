@@ -154,4 +154,15 @@ class PLBlog < Sinatra::Base
     erb :contact
   end
 
+  post "/comment_entry" do
+    @current_article.commenters.create({
+      :first => params[:first], 
+      :last => params[:last],
+      :email => params[:email],
+      :comment_text => params[:comments],
+      :date_commented => Time.now})
+
+      erb :bloghome
+  end
+  
 end
