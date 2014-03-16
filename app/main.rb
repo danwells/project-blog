@@ -81,9 +81,9 @@ class PLBlog < Sinatra::Base
     languages = ["JavaScript", "Java", "PHP", "C#", "Python", "C/C++", "Ruby", "Objective-C"]
     add_language_sections_to_article(languages, @current_article)
     
-    # @titles = Title.all
-    @future_titles = Title.where("titletype = ?", "future_article")
     @page_title = Title.find_by_titletype("page")
+    @future_titles = Title.where("titletype = ?", "future_article")
+    @current_author = Author.find(@current_article.author_id)
 
     # binding.pry
         
