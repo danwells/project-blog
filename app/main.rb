@@ -11,8 +11,7 @@ class PLBlog < Sinatra::Base
   helpers do
     
     def add_to_titles(title, type)
-      # Add a certain type of title to database if it doesn't already exist
-
+      # Add a title to database if it doesn't already exist
       if Title.find_by(titlestring: title, titletype: type).nil?  
         Title.create({:titlestring => title, :titletype => type}) 
       end     
@@ -46,6 +45,7 @@ class PLBlog < Sinatra::Base
       l.each do |language|
         sec_title = "#{a.article_title} for (#{language})"
         sec_body = "Section text body for the #{language} language...."
+        # Check for not adding a duplicate
         if Section.find_by(article_id: a.id, section_title: sec_title, section_body: sec_body).nil?
           a.sections.create({
             :section_title => sec_title, 
@@ -53,7 +53,7 @@ class PLBlog < Sinatra::Base
         end
       end
     
-      binding.pry
+      # binding.pry
     end
         
   end

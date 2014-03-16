@@ -14,7 +14,8 @@ div.comment_box {
 </style>
 
 <body id="bloghome">
-	<h2>Category: <em>(article.category)</em></h2>
+	<h2>Category: <%= @current_article.category %></h2>
+	<%# could also use -> Title.find_by_titletype("category").titlestring %>
 	<p>Introductory paragraph about blog/category..............</p>
 
 <hr>
