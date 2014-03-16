@@ -84,6 +84,7 @@ class PLBlog < Sinatra::Base
     @page_title = Title.find_by_titletype("page")
     @future_titles = Title.where("titletype = ?", "future_article")
     @current_author = Author.find(@current_article.author_id)
+    # @sections = Section.where("article_id = ?", @current_article.id)
 
     # binding.pry
         

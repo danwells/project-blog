@@ -16,7 +16,10 @@ div.article_title_box {
 }
 
 div.section_box {
-	border: 1px solid purple;
+	border: 1px solid gray;
+	background-color: #BDE8F6;
+	margin: 5px 10px 5px 10px;
+	padding: 10px;
 }
 	
 div.comment_box {
@@ -46,29 +49,14 @@ div.comment_box {
 		<p>Introductory paragraph about this article</p>
 	</div>
 	
-<hr>
-<hr>
-	<div class="section_box" id="Section_first_idnum">
-	  <h4><em>First Section Title (section.section_title)</em></h4>	
-		<p><em>...section body text...(section.section_body)</em></p>
-		<p><em>...supporting media (0 or more instances of medium.media_link/media_data of type medium.type)</em></p>
-	</div>
-		
-<hr>
-	
-	<p>               .</p>
-	<p>               .</p>
-	<p>... Repeat for each section...</p>
-	<p>               .</p>
-	<p>               .</p>
-		
-<hr>
+	<% @current_article.sections.each do |section| %>	
+		<div class="section_box" id="Section_<%= section.id %>">
+		  <h4><%=  section.section_title %></h4>	
+			<p><em><%=  section.section_body %></em></p>
+			<p><em>...supporting media (0 or more instances of medium.media_link/media_data of type medium.type)</em></p>
+		</div>
+	<% end %>	
 
-	<div class="section_box" id="Section_last_idnum">
-	  <h4><em>Last Section Title (section.section_title)</em></h4>	
-		<p><em>...section body text...(section.section_body)</em></p>
-		<p><em>...supporting media (0 or more instances of medium.media_link/media_data of type medium.type)</em></p>
-	</div>
 <hr>
 <hr>
 
