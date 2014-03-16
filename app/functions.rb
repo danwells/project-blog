@@ -56,7 +56,7 @@ ActiveRecord::Schema.define do
     create_table :sections do |table|
       table.column :article_id, :integer
       table.column :section_title, :string
-      table.column :section_body, :string
+      table.column :section_body, :text
     end
   end
 
@@ -122,7 +122,7 @@ end
 class Section < ActiveRecord::Base
   # article_id - integer
   # section_title - string
-  # section_body - string
+  # section_body - text
   
   belongs_to :article
   has_many :media
