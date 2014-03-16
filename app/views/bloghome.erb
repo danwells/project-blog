@@ -9,6 +9,12 @@ div.category_box {
 	padding: 10px;
 }
 
+div.article_title_box {
+	background-color: #9DC8D6;
+	margin: 5px;
+	padding: 10px;
+}
+
 div.section_box {
 	border: 1px solid purple;
 }
@@ -33,10 +39,12 @@ div.comment_box {
 		</p>
 	</div>
 
-	<h3>Article Title: <%= @current_article.article_title %></h3>
-	By: <strong><%= @current_author.first + " " + @current_author.last %></strong><br>
-	Posted on: <em><%= @current_article.date_posted %></em>
-	<p>Introductory paragraph about this article</p>
+	<div class="article_title_box">
+		<h3>Article Title: <%= @current_article.article_title %></h3>
+		By: <strong><%= @current_author.first + " " + @current_author.last %></strong><br>
+		Posted on: <em><%= @current_article.date_posted %></em>
+		<p>Introductory paragraph about this article</p>
+	</div>
 	
 <hr>
 <hr>
