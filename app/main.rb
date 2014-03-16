@@ -65,7 +65,17 @@ class PLBlog < Sinatra::Base
       end    
       # binding.pry
     end
-        
+    
+    def add_code_snippet_to_section(link, s) 
+      binding.pry
+      if Image.find_by(section_id: s.id, img_type: "snippet", img_link: link).nil?    
+        s.images.create({
+          :img_type => "snippet",
+          :img_link => link}) 
+      end     
+      binding.pry
+    end
+            
   end
 
   # Setup/common methods for all routes
@@ -81,6 +91,13 @@ class PLBlog < Sinatra::Base
     languages = ["JavaScript", "Java", "PHP", "C#", "Python", "C/C++", "Ruby", "Objective-C"]
     add_language_sections_to_article(languages, @current_article)
     
+    js_sec = @current_article.sections.where("section_title LIKE ?", "%#{languages[0]}%")[0]
+    add_code_snippet_to_section("http://i.imgur.com/8WFZtua.png", js_sec)
+    add_code_snippet_to_section("http://i.imgur.com/sTUF2EC.png", js_sec)
+    java_sec = @current_article.sections.where("section_title LIKE ?", "%#{languages[1]}%")[0]
+    add_code_snippet_to_section("http://i.imgur.com/sTUF2EC.png", java_sec)
+    
+
     @page_title = Title.find_by_titletype("page")
     @future_titles = Title.where("titletype = ?", "future_article")
     @current_author = Author.find(@current_article.author_id)

@@ -50,16 +50,23 @@ div.comment_box {
 	</div>
 	
 	<% @current_article.sections.each do |section| %>	
+		<% links = section.images.where(img_type: "snippet").pluck(:img_link) %>		
+		<% #binding.pry %>
 		<div class="section_box" id="Section_<%= section.id %>">
 		  <h4><%=  section.section_title %></h4>	
 			<p><em><%=  section.section_body %></em></p>
-			<p><em>...supporting media (0 or more instances of medium.media_link/media_data of type medium.type)</em></p>
+			<p><em>Section images:</em><br>
+				<% links.each do |link| %>
+					<img src="<%= link %>">
+				<% end %>
+			</p>
 		</div>
 	<% end %>	
 
 <hr>
 <hr>
-<img src="http://i.imgur.com/8WFZtua.png" title="JavaScriptVA"/>
+<!-- <img src="http://i.imgur.com/8WFZtua.png" title="JavaScriptVA"/>
+<img src="http://i.imgur.com/sTUF2EC.png" title="JavaVA"/> -->
 <!-- Unsuccessful attempts at adding an image
 <img src="<%= "#{PLBlog.settings.root}/images/javascript_va.png" %>" />
 <img src="/images/javascript_va.png" /> 

@@ -60,12 +60,12 @@ ActiveRecord::Schema.define do
     end
   end
 
-  unless ActiveRecord::Base.connection.tables.include? 'media'
-    create_table :media do |table|
+  unless ActiveRecord::Base.connection.tables.include? 'images'
+    create_table :images do |table|
       table.column :section_id, :integer
-      table.column :type, :string
-      table.column :media_link, :string
-      table.column :media_data, :binary
+      table.column :img_type, :string
+      table.column :img_link, :string
+      # table.column :media_data, :binary
     end
   end
 
@@ -125,14 +125,14 @@ class Section < ActiveRecord::Base
   # section_body - text
   
   belongs_to :article
-  has_many :media
+  has_many :images
 end
 
-class Medium < ActiveRecord::Base
+class Image < ActiveRecord::Base
   # section_id - integer
-  # type - string
-  # media_link - string
-  # media_data - binary
-  
+  # img_type - string
+  # img_link - string
+  # #media_data - binary
+
   belongs_to :section
 end
