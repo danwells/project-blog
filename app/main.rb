@@ -78,6 +78,11 @@ class PLBlog < Sinatra::Base
 
   # Setup/common methods for all routes
   before do
+    
+    # Most of this initialization  (including the helper methods) should be
+    # done through another 'data enty' page for entering/creating the blog
+    # data.  This refactoring will be left for later.
+    
     add_initial_page_title
     @nav_choice = "blog"
     @prev_search = "--"    
@@ -94,6 +99,11 @@ class PLBlog < Sinatra::Base
     java_sec = @current_article.sections.where("section_title LIKE ?", "%(#{languages[1]})%")[0]
     add_code_snippet_to_section("http://i.imgur.com/sTUF2EC.png", java_sec)
     
+    placeholder = "http://i689.photobucket.com/albums/vv253/pixelpeter/Avatars/thinker.jpg"
+    (2..7).each do |i|
+      next_sec = @current_article.sections.where("section_title LIKE ?", "%(#{languages[i]})%")[0]
+      add_code_snippet_to_section(placeholder, next_sec)
+    end
 
     @page_title = Title.find_by_titletype("page")
     @future_titles = Title.where("titletype = ?", "future_article")
