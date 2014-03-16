@@ -6,28 +6,30 @@ require 'sinatra/reloader'
 require_relative './functions'
 
 class PLBlog < Sinatra::Base
-  # NOTE: If have to embed app root directory in a directory string, use
-  #       "#{<application's sinatra class>.settings.root}/...rest of directory structure"
-  #  Example code:
-  #    @script = Script.new("#{MadLib.settings.root}/scripts/script1.txt")
   
   # Helper methods
   helpers do
     
-    def add_initial_page_title 
-      # Add page title to database if it doesn't already exist
-      if Title.find_by_titletype("page").nil?  
-        title_string = "Programming Languages - Syntax Comparisons by Example"    
-        Title.create({:titlestring => title_string, :titletype => "page"}) 
+    def add_to_titles(title, type)
+      # Add a certain type of title to database if it doesn't already exist
+
+      if Title.find_by(titlestring: title, titletype: type).nil?  
+        Title.create({:titlestring => title, :titletype => type}) 
       end     
+    end
+    
+    def add_initial_page_title 
+      page_title = "Programming Languages - Syntax Comparisons by Example"    
+      add_to_titles(page_title, "page")
       @titles = Title.all
       @page_title = Title.find_by_titletype("page")
     end
     
     def initialize_default_article(title)
+      author = Author.find_or_create_by({:first => "Dan", :last => "Wells"})
+      category = "Programming Languages"
+      add_to_titles(category, "category")
       if Article.find_by_article_title(title).nil?
-        author = Author.find_or_create_by({:first => "Dan", :last => "Wells"})
-        category = "Programming Languages"
         Article.create({
           :author_id => author.id, 
           :blog_content_id => -1, 
@@ -38,6 +40,22 @@ class PLBlog < Sinatra::Base
       # @articles = Article.all
     end
 
+    # l - languages array
+    # a - the article to add the sections to
+    def add_language_sections_to_article(l, a)
+      l.each do |language|
+        sec_title = "#{a.article_title} for (#{language})"
+        sec_body = "Section text body for the #{language} language...."
+        if Section.find_by(article_id: a.id, section_title: sec_title, section_body: sec_body).nil?
+          a.sections.create({
+            :section_title => sec_title, 
+            :section_body => sec_body})
+        end
+      end
+    
+      binding.pry
+    end
+        
   end
 
   # Setup/common methods for all routes
@@ -51,16 +69,9 @@ class PLBlog < Sinatra::Base
     @current_article = Article.find_by_article_title(default_title)
     
     languages = ["JavaScript", "Java", "PHP", "C#", "Python", "C/C++", "Ruby", "Objective-C"]
-    # if Section.count < languages.count
-      languages.each do |language|
-        @current_article.sections.create({
-          :section_title => "#{default_title} for (#{language})", 
-          :section_body => "Section text body for the #{language} language...."})
-        # Section.create({:article_id => -1, :section_title => language, :section_body => ""})
-      end
-    # end
-
-    binding.pry
+    add_language_sections_to_article(languages, @current_article)
+    
+    # binding.pry
     
     
   end
