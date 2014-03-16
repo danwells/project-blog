@@ -51,7 +51,7 @@ div.comment_box {
 	
 	<% @current_article.sections.each do |section| %>	
 		<% links = section.images.where(img_type: "snippet").pluck(:img_link) %>		
-		<% #binding.pry %>
+		<% binding.pry %>
 		<div class="section_box" id="Section_<%= section.id %>">
 		  <h4><%=  section.section_title %></h4>	
 			<p><em><%=  section.section_body %></em></p>
