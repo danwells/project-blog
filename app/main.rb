@@ -20,14 +20,25 @@ class PLBlog < Sinatra::Base
     def add_initial_page_title 
       page_title = "Programming Languages - Syntax Comparisons by Example"    
       add_to_titles(page_title, "page")
-      @titles = Title.all
-      @page_title = Title.find_by_titletype("page")
     end
     
     def initialize_default_article(title)
       author = Author.find_or_create_by({:first => "Dan", :last => "Wells"})
+      
+      add_to_titles(title, "article")
+      future_titles = [
+        "The Increment Operation", 
+        "The Conditional Statement", 
+        "Loops", 
+        "The Switch/Case Statement", 
+        "Class Declaration and Object Instantiation"]
+      future_titles.each do |title|
+        add_to_titles(title, "future_article")
+      end
+      
       category = "Programming Languages"
       add_to_titles(category, "category")
+      
       if Article.find_by_article_title(title).nil?
         Article.create({
           :author_id => author.id, 
@@ -51,8 +62,7 @@ class PLBlog < Sinatra::Base
             :section_title => sec_title, 
             :section_body => sec_body})
         end
-      end
-    
+      end    
       # binding.pry
     end
         
@@ -71,11 +81,19 @@ class PLBlog < Sinatra::Base
     languages = ["JavaScript", "Java", "PHP", "C#", "Python", "C/C++", "Ruby", "Objective-C"]
     add_language_sections_to_article(languages, @current_article)
     
+    # @titles = Title.all
+    @future_titles = Title.where("titletype = ?", "future_article")
+    @page_title = Title.find_by_titletype("page")
+
     # binding.pry
-    
-    
+        
   end
 
+  after do
+    ActiveRecord::Base.connection.close
+  end
+  
+  
   # Routes methods
   get "/" do
     erb :bloghome

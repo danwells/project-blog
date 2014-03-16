@@ -3,6 +3,12 @@ body {
 	background-color: #ADD8E6;
 }
 
+div.category_box {
+	background-color: #9DC8F6;
+	margin: 5px;
+	padding: 10px;
+}
+
 div.section_box {
 	border: 1px solid purple;
 }
@@ -14,12 +20,20 @@ div.comment_box {
 </style>
 
 <body id="bloghome">
-	<h2>Category: <%= @current_article.category %></h2>
-	<%# could also use -> Title.find_by_titletype("category").titlestring %>
-	<p>Introductory paragraph about blog/category..............</p>
+	<div class="category_box">
+		<h2>Category: <%= @current_article.category %></h2>
+		<%# could also use -> Title.find_by_titletype("category").titlestring %>
+		<p>Introductory paragraph about blog/category..............</p>
+		<p>Planned Future Articles:
+			<ul>
+				<% @future_titles.each do |title| %>
+					<li><em><%= title.titlestring %></em></li>
+				<% end %>
+			</ul>
+		</p>
+	</div>
 
-<hr>
-	<h3>Article Title: (e.g., The Variable Assignment Statement)  <em>(article.article_title)</em></h3>
+	<h3>Article Title: <%= @current_article.article_title %></h3>
 	By: <em>(author.first + author.last)</em><br>
 	Posted on: <em>(article.date_posted)</em>
 	<p>Introductory paragraph about this article</p>
