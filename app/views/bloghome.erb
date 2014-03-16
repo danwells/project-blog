@@ -35,7 +35,7 @@ div.comment_box {
 
 	<h3>Article Title: <%= @current_article.article_title %></h3>
 	By: <strong><%= @current_author.first + " " + @current_author.last %></strong><br>
-	Posted on: <em>(article.date_posted)</em>
+	Posted on: <em><%= @current_article.date_posted %></em>
 	<p>Introductory paragraph about this article</p>
 	
 <hr>
