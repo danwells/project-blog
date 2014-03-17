@@ -23,7 +23,10 @@ div.section_box {
 }
 	
 div.comment_box {
-	border: 5px solid black;
+	border: 1px solid black;
+	background-color: #DDFFA6;
+	margin: 5px 20px 5px 20px;
+	padding: 10px;
 }
 	
 </style>
@@ -77,27 +80,23 @@ div.comment_box {
 	<h3>Comments:</h3>
 	<div id="comment_entry_form">
 		<h4>Enter your information and comment:</h4>
-		<form action="comment_entry" method="post">
+		<form action="add_comment" method="post">
 			First Name: <input type="text" name="first" value=""><br>
 			Last Name : <input type="text" name="last" value=""><br>
 			Email     : <input type="email" name="email" value=""><br>
 		  Comment:<br> <textarea name="comments" rows="8" cols="40"></textarea>
 			<p><input type="submit" value="Continue &rarr;"></p>
-		</form>
-		
-		Add form to gather new comments and signup if not already in database.
+		</form>		
 	</div>
-	<div class="comment_box" id="Commenter_idnum">
-		<p>From:<em>(commenter.first + commenter.last)</em><br>
-		Added on:<em>(commenter.date_commented)</em></p>
-		<p><em>...comment body...(commenter.comment_text)</em></p>		
-	</div>
-	<p>               .</p>
-	<p>               .</p>
-	<p>... Repeat for each comment...</p>
-	<p>               .</p>
-	<p>               .</p>
-		
+	
+	<h4>Previous Comments</h4>
+	<% @current_article.commenters.reverse_each do |commenter| %>
+		<div class="comment_box" id="cid_<%= commenter.id %>">
+			<p>From: <%= commenter.first + " " + commenter.last %><br>
+			Added on: <em><%= commenter.date_commented %></em></p>
+			<p><%= commenter.comment_text %></em></p>		
+		</div>
+	<% end %>
 </body>
 
 <!-- EXAMPLE CODE

@@ -154,7 +154,7 @@ class PLBlog < Sinatra::Base
     erb :contact
   end
 
-  post "/comment_entry" do
+  post "/add_comment" do
     @current_article.commenters.create({
       :first => params[:first], 
       :last => params[:last],
