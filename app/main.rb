@@ -85,7 +85,7 @@ class PLBlog < Sinatra::Base
     
     add_initial_page_title
     @nav_choice = "blog"
-    @prev_search = "--"    
+    @cur_search = "--"    
 
     default_title = "The Variable Assignment Statement"
     initialize_default_article(default_title)
@@ -139,7 +139,7 @@ class PLBlog < Sinatra::Base
   end
   
   get "/search" do
-    @prev_search = params[:search_text]
+    @cur_search = params[:search_text]
     
     erb :bloghome
   end

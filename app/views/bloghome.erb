@@ -31,7 +31,44 @@ div.comment_box {
 	
 </style>
 
-<body id="bloghome">
+<body class="blog-body" id="bloghome">
+	<!-- <form id="searchForm" action="javascript:search();">
+		<div class="input-group">
+			<button id="go" class="btn-default" type="button"
+				onclick="document.getElementById('searchForm').submit(); return false;">
+			</button>
+			<input type="text" id="searchItem" class="form-control" placeholder="search">
+		</div>
+	</form>
+	
+	<script>
+		function search() {
+			var name = document.getElementById("searchForm").elements("searchItem").value;
+			var pattern = name.toLowerCase();
+			var targetId = "";
+			
+			var divs = document.getElementsByClassName("blog-body");
+			for (var i=0; i<body.length; i++) {
+				var para = divs[i].getElementsByTagName("div");
+				var index = para[0].innerText.toLowerCase().indexOf(pattern);
+				if (index != -1) {
+					targetId = divs[i].parentNode.id;
+					document.getElementById(targetId).scrollIntoView();
+					break;
+				}
+			}
+		}
+	</script> -->
+<!--
+	// $('#searchfor').keyup(function(){
+	// 	var page = $('#bloghome');
+	// 	var pageText = page.text().replace("<span>","").replace("</span>");
+	// 	var searchedText = $('#searchfor').val();
+	// 	var theRegEx = new RegExp("("+searchedText+")", "igm");
+	// 	var newHtml = pageText.replace(theRegEx, "<span>$1</span>");
+	// 	page.html(newHtml);
+	// });
+-->
 	<div class="category_box">
 		<h2>Category: <%= @current_article.category %></h2>
 		<%# could also use -> Title.find_by_titletype("category").titlestring %>
@@ -81,9 +118,9 @@ div.comment_box {
 	<div id="comment_entry_form">
 		<h4>Enter your information and comment:</h4>
 		<form action="add_comment" method="post">
-			First Name: <input type="text" name="first" value=""><br>
-			Last Name : <input type="text" name="last" value=""><br>
-			Email     : <input type="email" name="email" value=""><br>
+			First Name: <input type="text" name="first" placeholder="First Name"><br>
+			Last Name : <input type="text" name="last" placeholder="Last Name"><br>
+			Email     : <input type="email" name="email" placeholder="Email"><br>
 		  Comment:<br> <textarea name="comments" rows="8" cols="40"></textarea>
 			<p><input type="submit" value="Continue &rarr;"></p>
 		</form>		

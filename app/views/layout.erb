@@ -33,6 +33,11 @@ a:active {
 	clear:both;
 }
 
+#bloghome span {
+	text-decoration: underline;
+	background-color: yellow;
+}
+
 </style>
 
 <div class="banner">
@@ -54,9 +59,9 @@ a:active {
 	<div id="search_box">
 		<form action="search" method="get">
 			<label for="search_text">Search:</label><br>
-			<input type="text" name="search_text">
+			<input type="text" name="search_text" placeholder="search phrase">
 			<input type="submit" value="Continue &rarr;"><br>
-			Previous Search: <%= "'" + @prev_search + "'" %>	
+			Previous Search: <%= "'" + @cur_search + "'" %>	
 		</form>
 	</div>
 	
